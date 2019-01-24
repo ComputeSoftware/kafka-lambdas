@@ -1,7 +1,8 @@
 (ns compute.kafka-lambdas.core
   (:import (org.apache.kafka.streams.kstream Initializer Aggregator Merger KeyValueMapper ForeachAction Predicate)
            (java.lang.reflect Method)
-           (java.lang Thread$UncaughtExceptionHandler)))
+           (java.lang Thread$UncaughtExceptionHandler)
+           (org.apache.kafka.streams.processor TopicNameExtractor)))
 
 (defn- get-lambda-info
   [class-sym]
@@ -55,6 +56,10 @@
 (defmacro predicate
   [args & body]
   `(jlambda Predicate ~args ~@body))
+
+(defmacro topic-name-extractor
+  [args & body]
+  `(jlambda TopicNameExtractor ~args ~@body))
 
 (defmacro uncaught-exception-handler
   [args & body]
