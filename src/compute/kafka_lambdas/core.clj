@@ -1,5 +1,5 @@
 (ns compute.kafka-lambdas.core
-  (:import (org.apache.kafka.streams.kstream Initializer Aggregator Merger KeyValueMapper ForeachAction Predicate ValueMapper ValueMapperWithKey)
+  (:import (org.apache.kafka.streams.kstream Initializer Aggregator Merger KeyValueMapper ForeachAction Predicate ValueMapper ValueMapperWithKey ValueJoiner)
            (java.lang.reflect Method)
            (java.lang Thread$UncaughtExceptionHandler)
            (org.apache.kafka.streams.processor TopicNameExtractor)))
@@ -60,6 +60,10 @@
 (defmacro foreach-action
   [args & body]
   `(jlambda ForeachAction ~args ~@body))
+
+(defmacro value-joiner
+  [args & body]
+  `(jlambda ValueJoiner ~args ~@body))
 
 (defmacro predicate
   [args & body]
