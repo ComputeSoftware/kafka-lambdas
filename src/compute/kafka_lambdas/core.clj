@@ -2,7 +2,7 @@
   (:import (org.apache.kafka.streams.kstream Initializer Aggregator Merger KeyValueMapper ForeachAction Predicate ValueMapper ValueMapperWithKey ValueJoiner)
            (java.lang.reflect Method)
            (java.lang Thread$UncaughtExceptionHandler)
-           (org.apache.kafka.streams.processor TopicNameExtractor)))
+           (org.apache.kafka.streams.processor TopicNameExtractor TimestampExtractor)))
 
 (defn- get-lambda-info
   [class-sym]
@@ -72,6 +72,10 @@
 (defmacro topic-name-extractor
   [args & body]
   `(jlambda TopicNameExtractor ~args ~@body))
+
+(defmacro timestamp-extractor
+  [args & body]
+  `(jlambda TimestampExtractor ~args ~@body))
 
 (defmacro uncaught-exception-handler
   [args & body]
